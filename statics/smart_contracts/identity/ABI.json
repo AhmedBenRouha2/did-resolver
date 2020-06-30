@@ -1,0 +1,313 @@
+[
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_attributeType",
+				"type": "bytes32"
+			},
+			{
+				"name": "_valideTo",
+				"type": "uint256"
+			},
+			{
+				"name": "_value",
+				"type": "bytes32[]"
+			}
+		],
+		"name": "addAttribute",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_delegate",
+				"type": "address"
+			},
+			{
+				"name": "_valideTo",
+				"type": "uint256"
+			}
+		],
+		"name": "addDelegate",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_smartContractAddress",
+				"type": "address"
+			}
+		],
+		"name": "addNewRelatedEntity",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_smartContractAddress",
+				"type": "address"
+			}
+		],
+		"name": "addNewTrustedEntity",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "endVote",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_voter",
+				"type": "address"
+			},
+			{
+				"name": "_newAddress",
+				"type": "address"
+			},
+			{
+				"name": "_newPublicKey",
+				"type": "bytes32[]"
+			}
+		],
+		"name": "receiveVote",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_delegate",
+				"type": "address"
+			}
+		],
+		"name": "revokeDelegate",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_trustedEntity",
+				"type": "address"
+			}
+		],
+		"name": "revokeTrustedEntity",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_relatedEntityIdentity",
+				"type": "address"
+			},
+			{
+				"name": "_newAddress",
+				"type": "address"
+			},
+			{
+				"name": "_newPublicKey",
+				"type": "bytes32[]"
+			}
+		],
+		"name": "sendVote",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_seedHashFragments",
+				"type": "bytes32"
+			}
+		],
+		"name": "setSeedHash",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"name": "_initAddress",
+				"type": "address"
+			},
+			{
+				"name": "_ownerPublicKey",
+				"type": "bytes32[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "delegate",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "validTo",
+				"type": "uint256"
+			}
+		],
+		"name": "DIDDelegateChanged",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "attributeType",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"name": "_valideTo",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "value",
+				"type": "bytes32[]"
+			}
+		],
+		"name": "DIDAttributeChanged",
+		"type": "event"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_seedHashFragments",
+				"type": "bytes32"
+			}
+		],
+		"name": "checkSeed",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "delegates",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getAllRelatedEntities",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getAllTrustedEntities",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getOwnerAddress",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getOwnerPublicKey",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes32[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
