@@ -63,7 +63,7 @@ module.exports = function DidResolver(provider, ABI) {
             });
         },
         this.testSync = (data) => {
-            resolve(data);
+            return(data);
 
         }
 }
