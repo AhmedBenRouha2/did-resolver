@@ -1,59 +1,69 @@
-const services = require('./services/did-resolver.service');
+const Services = require('./services/did-resolver.service');
 
-module.exports = {
-
-    wrapDIdToDocument: (DID) => {
-
+module.exports = function DidResolver(provider, ABI) {
+    this.wrapDIdToDocument = (DID) => {
+        let services = new Services(provider, ABI);
         let did = DID;
         let contractAddress = "0x" + did.split(':')[2];
-        services.getEventsHistory('DIDAttributeChanged', contractAddress).then(events => {
-            let did_document = services.formatAttributes(events, did);
-            if (req.query.publicKey) {
-                return (services.filterDidDocument(req.query.publicKey, did_document.publicKey));
-            } if (req.query.service) {
-                return (services.filterDidDocument(req.query.service, did_document.service));
-            } if (req.query.authentication) {
-                return (services.filterDidDocument(req.query.authentication, did_document.authentication));
-            }
-            else {
-                return (did_document);
-            }
-        })
-    },
+        return new Promise((resolve, reject) => {
+            services.getEventsHistory('DIDAttributeChanged', contractAddress).then(events => {
+                let did_document = services.formatAttributes(events, did);
+                resolve(did_document);
 
-
-    addDelegate: (req, res, next) => {
-        let data = req.body;
-        let contractAddress = data.contractAddress
-        let delegateAddress = data.delegateAddress
-        let validTo = data.delegateAddress
-        let citizenAddress = data.citizenAddress
-
-        services.unlockAccount(citizenAddress).then(result => {
-            services.addDelegate(delegateAddress, validTo, contractAddress, citizenAddress).then(result => {
-                return (result);
             })
         })
+
     },
 
-    manageAttribute: (req, res, next) => {
-        let action = req.params.action;
-        if (action === 'add' || action === 'revoke') {
-            let data = req.body;
+
+        this.addDelegate = (DATA) => {
+            let services = new Services(provider, ABI);
+            let data = DATA;
             let contractAddress = data.contractAddress
-            let attributeType = data.attributeType
-            let value = data.value
+            let delegateAddress = data.delegateAddress
+            let validTo = data.delegateAddress
             let citizenAddress = data.citizenAddress
-            let valideTo = 0;
-            if (action === 'add') {
-                valideTo = data.valideTo
-
-            }
-            services.unlockAccount(citizenAddress).then(result => {
-                services.addAttribute(attributeType, valideTo, value, contractAddress, citizenAddress).then(result => {
-                    return (result);
+            return new Promise((resolve, reject) => {
+                services.unlockAccount(citizenAddress).then(result => {
+                    services.addDelegate(delegateAddress, validTo, contractAddress, citizenAddress).then(result => {
+                        resolve(result);
+                    })
                 })
-            })
+            });
+        },
+
+        this.manageAttribute = (_Action, _Data) => {
+            let services = new Services(provider, ABI);
+            let action = _Action;
+            if (action === 'add' || action === 'revoke') {
+                let data = _Data;
+                let contractAddress = data.contractAddress
+                let attributeType = data.attributeType
+                let value = data.value
+                let citizenAddress = data.citizenAddress
+                let valideTo = 0;
+                if (action === 'add') {
+                    valideTo = data.valideTo
+                }
+                return new Promise((resolve, reject) => {
+                    services.unlockAccount(citizenAddress).then(result => {
+                        services.addAttribute(attributeType, valideTo, value, contractAddress, citizenAddress).then(result => {
+                            resolve(result);
+                        })
+                    });
+                });
+            }
+        },
+
+        this.testAsync = (data) => {
+            return new Promise((resolve, reject) => {
+
+                resolve(data);
+
+            });
+        },
+        this.testSync = (data) => {
+            resolve(data);
+
         }
-    },
 }

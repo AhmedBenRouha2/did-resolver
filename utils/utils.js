@@ -25,12 +25,17 @@ module.exports = {
 
     bytesToString: (data) => {
         if (typeof data === "string") {
-            return Web3.utils.toAscii(data);
+            let dataToString = (Web3.utils.toAscii(data)).replace(/\0/g, '');
+            return dataToString;
         } else if (typeof data === "object") {
             let result = '';
-            data.forEach(element => {
-                result += Web3.utils.toAscii(element)
-            });
+            for (let index = 0; index < data.length; index++) {
+                if (index === data.length - 1) {
+                    result += (Web3.utils.toAscii(data[index])).replace(/\0/g, '');
+                } else {
+                    result += Web3.utils.toAscii(data[index]);
+                }
+            }
             return result;
         }
     },
