@@ -1,8 +1,8 @@
 var Web3 = require('web3');
-const identityContractABI = require('./statics/smart_contracts/identity/ABI.json');
-const statics = require('./statics/statics.json');
+const identityContractABI = require('../statics/smart_contracts/identity/ABI.json');
+const statics = require('../statics/statics.json');
 const web3 = new Web3(statics.provider);
-const utils = require('./utils/utils');
+const utils = require('../utils/utils');
 
 module.exports = {
     getEventsHistory: async (eventName, contractAddress) => {
